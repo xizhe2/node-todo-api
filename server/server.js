@@ -16,9 +16,22 @@ var app = express();
 //middleware: bodyParser take json turn to an obj and attached to req obj..
 app.use(bodyParser.json());
 
-//creat routs
+//creat new ressouce -> post,send the ressouce as a body: send a json obj over the server,
+//which has text property, server gets that text property to creat a new model,
+//with complete id/property/body to send back to client
+//creat post routs:  url: creat ressouce;  callback function
 app.post('/todos', (req, res)=>{
-  console.log(req.body);
+  // console.log(req.body);
+  var todo = new Todo({
+    text: req.body.text
+  });
+
+//save the todo model in db, then provide secess and error cas
+  todo.save().then((doc)=>{
+    res.send(doc); //if secess, will send back the todo
+  }, (e)=>{
+    res.status(400).send(e); //if err, will send back the e or send back the http status
+  });
 });
 
 

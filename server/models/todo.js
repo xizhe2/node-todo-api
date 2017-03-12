@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+
 //create Todo model: validation
 //model: name of model, obj model has property
 var Todo = mongoose.model('Todo', {
